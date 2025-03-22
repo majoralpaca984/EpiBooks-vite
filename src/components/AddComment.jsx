@@ -1,68 +1,64 @@
-import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { useState } from "react";
+import { Button, Form } from "react-bootstrap";
 
 const AddComment = ({ asin, onNewComment }) => {
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [rate, setRate] = useState(1);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     const newComment = {
       comment,
       rate,
-      elementId: asin,
+      elementId: asin, // Collegato al libro
     };
 
     try {
-      const response = await fetch('https://striveschool-api.herokuapp.com/api/comments', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMGY1NzFlMTQwNjAwMTUzMTRkNzMiLCJpYXQiOjE3NDI1ODExODQsImV4cCI6MTc0Mzc5MDc4NH0.X08TAN2lOdY9A7UMkOQYKBgNYn47NIRob0RUSogbNHQ'
+      const response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/comments/",
+        {
+          method: "POST",
+          body: JSON.stringify(newComment),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMGY1NzFlMTQwNjAwMTUzMTRkNzMiLCJpYXQiOjE3NDI1ODExODQsImV4cCI6MTc0Mzc5MDc4NH0.X08TAN2lOdY9A7UMkOQYKBgNYn47NIRob0RUSogbNHQ",
+          },
+        }
+      );
 
-        },
-        body: JSON.stringify(newComment),
-      });
+      if (!response.ok) throw new Error("Errore nell'invio del commento");
 
-      if (response.ok) {
-        alert('Recensione inviata con successo!');
-        setComment('');
-        setRate(1);
-        onNewComment(); // ricarica i commenti dopo l’invio
-      } else {
-        alert('Errore durante l’invio della recensione');
-      }
+      setComment(""); // Reset campo testo
+      setRate(1); // Reset rating
+      onNewComment(); // Aggiorna i commenti nella CommentArea
     } catch (error) {
-      console.error(error);
-      alert('Errore di connessione');
+      console.error("Errore:", error);
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="mt-4">
-      <h5>Aggiungi una recensione</h5>
-      <Form.Group className="mb-2">
-        <Form.Label>Testo</Form.Label>
+    <Form>
+      <Form.Group>
+        <Form.Label>Scrivi un commento</Form.Label>
         <Form.Control
           type="text"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          required
+          placeholder="Inserisci il tuo commento"
         />
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>Valutazione</Form.Label>
+      <Form.Group className="mt-2">
+        <Form.Label>Valutazione (1-5)</Form.Label>
         <Form.Select value={rate} onChange={(e) => setRate(e.target.value)}>
-          <option value="1">⭐ 1</option>
-          <option value="2">⭐ 2</option>
-          <option value="3">⭐ 3</option>
-          <option value="4">⭐ 4</option>
-          <option value="5">⭐ 5</option>
+          {[1, 2, 3, 4, 5].map((num) => (
+            <option key={num} value={num}>
+              {num}
+            </option>
+          ))}
         </Form.Select>
       </Form.Group>
-      <Button type="submit" variant="primary">
-        Invia recensione
+      <Button className="mt-3" variant="primary" onClick={handleSubmit}>
+        Invia Recensione
       </Button>
     </Form>
   );

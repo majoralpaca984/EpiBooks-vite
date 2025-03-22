@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import CommentsList from './CommentsList';
 import AddComment from './AddComment';
+import { Spinner } from 'react-bootstrap';
 
 const CommentArea = ({ asin }) => {
   const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);  
   const [error, setError] = useState(false);
 
   const fetchComments = async () => {
@@ -37,8 +38,15 @@ const CommentArea = ({ asin }) => {
 
   return (
     <div className="mt-3">
-      {loading && <p>Caricamento commenti...</p>}
-      {error && <p>Errore nel recupero dei commenti.</p>}
+      {loading && (
+        <div className="text-center">
+          <Spinner animation="border" variant="primary" />
+          <p>Caricamento commenti...</p>
+        </div>
+      )}
+
+      {error && <p className="text-danger">Errore nel recupero dei commenti.</p>}
+
       {!loading && !error && (
         <>
           <CommentsList comments={comments} />
