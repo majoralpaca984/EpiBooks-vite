@@ -81,37 +81,6 @@ npm run dev
 
 ---
 
-## 🌐 Deploy GitHub Pages
-
-Nel file `vite.config.js` assicurati di avere:
-
-```js
-export default defineConfig({
-  base: '/EpiBooks-vite/',
-  plugins: [react()],
-})
-```
-
-E aggiungi in `package.json`:
-
-```json
-"scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "preview": "vite preview",
-  "deploy": "gh-pages -d dist"
-}
-```
-
-Per pubblicare:
-
-```bash
-npm run build
-npm run deploy
-```
-
----
-
 ## 📬 Credits
 
 Sviluppato durante il percorso **EPICODE – Full Stack Web Development Bootcamp**
