@@ -8,6 +8,7 @@ const CommentArea = ({ asin }) => {
   const [loading, setLoading] = useState(true);  
   const [error, setError] = useState(false);
 
+ 
   const fetchComments = async () => {
     try {
       setLoading(true);
@@ -30,6 +31,30 @@ const CommentArea = ({ asin }) => {
     }
   };
 
+  
+  const handleDelete = async (commentId) => {
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/comments/${commentId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMGY1NzFlMTQwNjAwMTUzMTRkNzMiLCJpYXQiOjE3NDI1ODExODQsImV4cCI6MTc0Mzc5MDc4NH0.X08TAN2lOdY9A7UMkOQYKBgNYn47NIRob0RUSogbNHQ"
+          },
+        }
+      );
+
+      if (response.ok) {
+        fetchComments(); 
+      } else {
+        alert("Errore nella cancellazione del commento");
+      }
+    } catch (error) {
+      console.error("Errore DELETE:", error);
+    }
+  };
+
+  
   useEffect(() => {
     if (asin) {
       fetchComments();
@@ -49,7 +74,11 @@ const CommentArea = ({ asin }) => {
 
       {!loading && !error && (
         <>
-          <CommentsList comments={comments} />
+          <CommentsList
+            comments={comments}
+            onUpdate={fetchComments}
+            onDelete={handleDelete} 
+          />
           <AddComment asin={asin} onNewComment={fetchComments} />
         </>
       )}
