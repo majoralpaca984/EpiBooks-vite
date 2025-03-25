@@ -1,35 +1,25 @@
-import { useState } from 'react';
-import { Container, Row, Col, Form } from 'react-bootstrap';
-import SingleBook from './SingleBook';
-
 import fantasy from '../data/fantasy.json';
 import horror from '../data/horror.json';
 import romance from '../data/romance.json';
 import scifi from '../data/scifi.json';
 import history from '../data/history.json';
 
-const AllTheBooks = () => {
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import SingleBook from './SingleBook';
+
+const AllTheBooks = ({ searchQuery }) => {
   const allBooks = [...fantasy, ...horror, ...romance, ...scifi, ...history];
-  const [searchTerm, setSearchTerm] = useState('');
+
 
   const filteredBooks = allBooks.filter((book) =>
-    book.title.toLowerCase().includes(searchTerm.toLowerCase())
+    book.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <Container className="mt-5 px-4">
-      <Form className="mb-4">
-        <Form.Control
-          type="text"
-          placeholder="Cerca un libro per titolo..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </Form>
-
-      <Row className="gx-4 gy-4">
-        {filteredBooks.map((book, index) => (
-          <Col key={`${book.asin}-${index}`} xs={12} sm={6} md={4} lg={3} xl={2}>
+    <Container className="mt-4">
+      <Row>
+        {filteredBooks.map((book) => (
+          <Col key={`${book.asin}-${book.title}`} xs={6} sm={4} md={3} lg={2} className="mb-4">
             <SingleBook book={book} />
           </Col>
         ))}
@@ -39,3 +29,4 @@ const AllTheBooks = () => {
 };
 
 export default AllTheBooks;
+
