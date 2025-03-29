@@ -5,21 +5,21 @@ import { Spinner } from 'react-bootstrap';
 
 const CommentArea = ({ asin }) => {
   const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(true);  
+  const [loading, setLoading] = useState(false); 
   const [error, setError] = useState(false);
 
- 
+  
   const fetchComments = async () => {
     try {
       setLoading(true);
       const response = await fetch(`https://striveschool-api.herokuapp.com/api/books/${asin}/comments`, {
         headers: {
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMGY1NzFlMTQwNjAwMTUzMTRkNzMiLCJpYXQiOjE3NDI1ODExODQsImV4cCI6MTc0Mzc5MDc4NH0.X08TAN2lOdY9A7UMkOQYKBgNYn47NIRob0RUSogbNHQ"
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMGY1NzFlMTQwNjAwMTUzMTRkNzMiLCJpYXQiOjE3NDI1ODExODQsImV4cCI6MTc0Mzc5MDc4NH0.X08TAN2lOdY9A7UMkOQYKBgNYn47NIRob0RUSogbNHQ',
         },
       });
 
       if (!response.ok) {
-        throw new Error('Errore nel recupero commenti');
+        throw new Error('Errore nel recupero dei commenti');
       }
 
       const data = await response.json();
@@ -31,7 +31,7 @@ const CommentArea = ({ asin }) => {
     }
   };
 
-  
+  // 🧽 DELETE COMMENT
   const handleDelete = async (commentId) => {
     try {
       const response = await fetch(
@@ -39,7 +39,7 @@ const CommentArea = ({ asin }) => {
         {
           method: 'DELETE',
           headers: {
-            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMGY1NzFlMTQwNjAwMTUzMTRkNzMiLCJpYXQiOjE3NDI1ODExODQsImV4cCI6MTc0Mzc5MDc4NH0.X08TAN2lOdY9A7UMkOQYKBgNYn47NIRob0RUSogbNHQ"
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMGY1NzFlMTQwNjAwMTUzMTRkNzMiLCJpYXQiOjE3NDI1ODExODQsImV4cCI6MTc0Mzc5MDc4NH0.X08TAN2lOdY9A7UMkOQYKBgNYn47NIRob0RUSogbNHQ',
           },
         }
       );
@@ -63,21 +63,26 @@ const CommentArea = ({ asin }) => {
 
   return (
     <div className="mt-3">
-      {loading && (
+      {!asin && <p className="text-muted text-center">Seleziona un libro per vedere i commenti</p>}
+
+      {loading && asin && (
         <div className="text-center">
           <Spinner animation="border" variant="primary" />
           <p>Caricamento commenti...</p>
         </div>
       )}
 
-      {error && <p className="text-danger">Errore nel recupero dei commenti.</p>}
+      {error && asin && (
+        <p className="text-danger">Errore nel recupero dei commenti.</p>
+      )}
 
-      {!loading && !error && (
+      {!loading && !error && asin && (
         <>
+          <h5 className="text-center">Recensioni</h5>
           <CommentsList
             comments={comments}
             onUpdate={fetchComments}
-            onDelete={handleDelete} 
+            onDelete={handleDelete}
           />
           <AddComment asin={asin} onNewComment={fetchComments} />
         </>

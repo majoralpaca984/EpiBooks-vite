@@ -4,7 +4,6 @@ import { ListGroup } from 'react-bootstrap';
 const CommentsList = ({ comments, onUpdate, onDelete }) => {
   return (
     <div className="mt-3">
-      <h5 className="text-center mb-2">Recensioni</h5>
       {comments.length > 0 ? (
         <ListGroup>
           {comments.map((comment) => (

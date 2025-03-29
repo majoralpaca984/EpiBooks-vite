@@ -1,18 +1,21 @@
-# 📚 EpiBooks – React + Vite Bookstore Project
+# 📚 EpiBooks-vite
 
-Benvenuto nel progetto **EpiBooks**, una libreria online realizzata con **React + Vite**.  
-L'applicazione permette di esplorare una raccolta di libri, visualizzare i dettagli, selezionare un libro, filtrarlo per titolo e gestire recensioni tramite API REST.
+Benvenuto su **EpiBooks**, una libreria online realizzata con React + Vite + Bootstrap 5.  
+Questa applicazione ti permette di cercare libri, visualizzarne i dettagli e gestire recensioni attraverso chiamate API REST.
 
----
 
-## 🚀 Tecnologie utilizzate
 
-- React 19
-- Vite
-- Bootstrap 5.3 + React-Bootstrap
-- REST API Integration (GET, POST, PUT, DELETE)
+## 🚀 Funzionalità principali
 
----
+- ✅ Visualizzazione dei libri da più file JSON
+- 🔍 Ricerca istantanea per titolo
+- 📌 Selezione di un libro con bordo rosso
+- 💬 Visualizzazione dei commenti per il libro selezionato
+- ➕ Aggiunta di un nuovo commento
+- ✏️ Modifica inline del commento
+- ❌ Eliminazione del commento
+- 🎯 Layout responsive a due colonne con Bootstrap
+- 🚫 Rimozione dei duplicati dai dati
 
 ## 📂 Struttura del progetto
 
@@ -41,21 +44,6 @@ src/
 
 ---
 
-## 🖼️ Funzionalità principali
-
-- ✅ Navbar responsive con React-Bootstrap
-- ✅ Footer responsive
-- ✅ Messaggio di benvenuto con Alert Bootstrap
-- ✅ Griglia di libri visualizzati tramite `.json`
-- ✅ Componente `SingleBook` cliccabile con bordo rosso quando selezionato
-- ✅ Ricerca tramite input controllato per filtrare i titoli dei libri
-- ✅ Caricamento dinamico delle recensioni con `CommentArea`
-- ✅ Spinner durante il caricamento delle recensioni
-- ✅ Gestione errori
-- ✅ Aggiunta recensioni tramite `AddComment` e POST API
-
----
-
 ## 💬 Integrazione API
 
 - [x] **GET** recensioni per ASIN → `useEffect` + `fetch`
@@ -65,12 +53,6 @@ src/
 
 ---
 
-## 🔒 Sicurezza Token API (nota importante)
-
-> Il token non è nascosto perché questo è un progetto frontend pubblicato su GitHub Pages.  
-Per maggiore sicurezza, il token andrebbe gestito tramite **.env** (solo lato backend) o **proxy server**, ma in un progetto pubblico frontend è comunque visibile.
-
----
 
 ## 📡 Come avviare il progetto localmente
 
