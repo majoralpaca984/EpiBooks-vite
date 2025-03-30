@@ -48,7 +48,7 @@ src/
 
 - [x] **GET** recensioni per ASIN → `useEffect` + `fetch`
 - [x] **POST** recensioni con form
-- [ ] **PUT** e **DELETE** recensioni (extra da completare)
+- [x] **PUT** e **DELETE** recensioni
 - [x] Autenticazione con Bearer Token nell’header
 
 ---
