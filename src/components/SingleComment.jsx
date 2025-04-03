@@ -39,7 +39,6 @@ const SingleComment = ({ comment, onUpdate, onDelete }) => {
   return (
     <ListGroup.Item>
       {isEditing ? (
-        // Modalità modifica
         <Form onSubmit={handleEditSubmit}>
           <Form.Control
             className="mb-2"
@@ -54,7 +53,7 @@ const SingleComment = ({ comment, onUpdate, onDelete }) => {
           >
             {[1, 2, 3, 4, 5].map((r) => (
               <option key={r} value={r}>
-                {r} ⭐
+                {r} ⭐ 
               </option>
             ))}
           </Form.Select>
@@ -72,7 +71,7 @@ const SingleComment = ({ comment, onUpdate, onDelete }) => {
       ) : (
         
         <>
-          <strong>{comment.author}:</strong> {comment.comment} – ⭐ {comment.rate}
+          <strong>{comment.author}:</strong> {comment.comment} ⭐ {comment.rate}
           <div className="mt-2">
             <Button
               size="sm"

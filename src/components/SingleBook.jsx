@@ -1,14 +1,16 @@
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const SingleBook = ({ book, isSelected, onSelect }) => {
+  const navigate = useNavigate();
+
   return (
     <Card
-      onClick={onSelect}
+      onClick={onSelect} 
       style={{
         border: isSelected ? '3px solid red' : '1px solid lightgray',
         cursor: 'pointer',
         height: '100%',
-        boxShadow: isSelected ? '0 0 10px rgba(255, 0, 0, 0.5)' : 'none',
       }}
       className="h-100"
     >
@@ -20,6 +22,18 @@ const SingleBook = ({ book, isSelected, onSelect }) => {
       />
       <Card.Body>
         <Card.Title className="fs-6 text-center">{book.title}</Card.Title>
+
+        <Button
+          variant="success"
+          size="sm"
+          className="mt-2 w-100"
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate(`/book/${book.asin}`);
+          }}
+        >
+          Dettagli
+        </Button>
       </Card.Body>
     </Card>
   );

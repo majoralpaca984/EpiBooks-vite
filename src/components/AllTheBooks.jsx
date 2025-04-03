@@ -2,15 +2,14 @@ import { Row, Col } from 'react-bootstrap';
 import SingleBook from './SingleBook';
 
 
-import fantasy from '../data/fantasy.json';
-import horror from '../data/horror.json';
-import romance from '../data/romance.json';
+
 import scifi from '../data/scifi.json';
 import history from '../data/history.json';
+import romance from '../data/romance.json/';
 
 const AllTheBooks = ({ searchQuery, selectedAsin, setSelectedAsin }) => {
   
-  const allBooksRaw = [...fantasy, ...horror, ...romance, ...scifi, ...history];
+  const allBooksRaw =  ([...scifi, ...history,...romance,]);
 
   
   const allBooks = allBooksRaw.filter(
