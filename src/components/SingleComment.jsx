@@ -16,7 +16,7 @@ const SingleComment = ({ comment, onUpdate, onDelete }) => {
           headers: {
             'Content-Type': 'application/json',
             Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMGY1NzFlMTQwNjAwMTUzMTRkNzMiLCJpYXQiOjE3NDI1ODExODQsImV4cCI6MTc0Mzc5MDc4NH0.X08TAN2lOdY9A7UMkOQYKBgNYn47NIRob0RUSogbNHQ',
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMGY1NzFlMTQwNjAwMTUzMTRkNzMiLCJpYXQiOjE3NDM5NjcxMDEsImV4cCI6MTc0NTE3NjcwMX0.jrz2E7UF_TyOCP4BUHb19tE_Gma-Mpa9U8P8smySB-k',
           },
           body: JSON.stringify({
             comment: editedComment,

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
 const AddComment = ({ asin, onNewComment }) => {
-  
   const [comment, setComment] = useState('');
   const [rate, setRate] = useState(1);
 
@@ -13,29 +12,32 @@ const AddComment = ({ asin, onNewComment }) => {
       alert("Nessun libro selezionato.");
       return;
     }
+
     try {
       const response = await fetch('https://striveschool-api.herokuapp.com/api/comments', {
         method: 'POST',
         headers: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMGY1NzFlMTQwNjAwMTUzMTRkNzMiLCJpYXQiOjE3NDI1ODExODQsImV4cCI6MTc0Mzc5MDc4NH0.X08TAN2lOdY9A7UMkOQYKBgNYn47NIRob0RUSogbNHQ',
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMGY1NzFlMTQwNjAwMTUzMTRkNzMiLCJpYXQiOjE3NDM5NjcxMDEsImV4cCI6MTc0NTE3NjcwMX0.jrz2E7UF_TyOCP4BUHb19tE_Gma-Mpa9U8P8smySB-k",
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           comment,
           rate,
-          elementId: asin, 
+          elementId: asin,
         }),
       });
 
       if (response.ok) {
-        setComment(''); 
-        setRate(1);      
-        onNewComment();  
+        setComment('');
+        setRate(1);
+        onNewComment(); // ricarica commenti
       } else {
-        alert('Errore durante l\'invio del commento');
+        const errorDetails = await response.json();
+        alert(`Errore durante l'invio del commento: ${errorDetails.message || 'Errore generico'}`);
       }
     } catch (error) {
       console.error('Errore POST:', error);
+      alert('Errore di rete durante l\'invio del commento');
     }
   };
 
@@ -51,6 +53,7 @@ const AddComment = ({ asin, onNewComment }) => {
             placeholder="Scrivi qui..."
             value={comment}
             onChange={(e) => setComment(e.target.value)}
+            required
           />
         </Form.Group>
 
