@@ -1,8 +1,5 @@
 import { Row, Col } from 'react-bootstrap';
 import SingleBook from './SingleBook';
-
-
-
 import scifi from '../data/scifi.json';
 import history from '../data/history.json';
 import romance from '../data/romance.json/';

@@ -31,7 +31,6 @@ const CommentArea = ({ asin }) => {
     }
   };
 
-  // 🧽 DELETE COMMENT
   const handleDelete = async (commentId) => {
     try {
       const response = await fetch(

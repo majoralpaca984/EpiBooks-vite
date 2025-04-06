@@ -9,12 +9,10 @@ const AddComment = ({ asin, onNewComment }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
     if (!asin) {
       alert("Nessun libro selezionato.");
       return;
     }
-
     try {
       const response = await fetch('https://striveschool-api.herokuapp.com/api/comments', {
         method: 'POST',
