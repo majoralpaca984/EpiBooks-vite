@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const MyNav = ({ searchQuery, setSearchQuery }) => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="light" variant="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">EpiBooks</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -16,7 +16,7 @@ const MyNav = ({ searchQuery, setSearchQuery }) => {
           <Form className="d-flex ms-auto">
             <Form.Control
               type="search"
-              placeholder="Cerca un libro per titolo!"
+              placeholder ="Cerca un libro per titolo"
               className="me-2"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
