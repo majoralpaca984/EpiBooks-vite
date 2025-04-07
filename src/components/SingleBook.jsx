@@ -1,15 +1,24 @@
 import { Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { ThemeContext } from '../modules/context';
 
 const SingleBook = ({ book, isSelected, onSelect }) => {
   const navigate = useNavigate();
+  const [theme] = useContext(ThemeContext);
+
+  const cardBg = theme === 'dark' ? '#444' : '#fff';
+  const textColor = theme === 'dark' ? '#fff' : '#333';
 
   return (
     <Card
-      onClick={onSelect} 
+      onClick={onSelect}
       style={{
+        backgroundColor: cardBg,
+        color: textColor, 
         border: isSelected ? '3px solid red' : '1px solid lightgray',
         cursor: 'pointer',
+        height: '100%',
       }}
       className="h-100"
     >

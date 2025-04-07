@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import CommentsList from './CommentsList';
 import AddComment from './AddComment';
 import { Spinner } from 'react-bootstrap';
+import { ThemeContext } from '../modules/context';
 
 const CommentArea = ({ asin }) => {
+  const [theme] = useContext(ThemeContext);
+
+  const bgColor = theme === 'dark' ? '#333333' : '#ffffff';
+  const textColor = theme === 'dark' ? '#ffffff' : '#333333';
+
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false); 
   const [error, setError] = useState(false);
 
-  
   const fetchComments = async () => {
     try {
       setLoading(true);
@@ -53,7 +58,6 @@ const CommentArea = ({ asin }) => {
     }
   };
 
-  
   useEffect(() => {
     if (asin) {
       fetchComments();
@@ -61,7 +65,15 @@ const CommentArea = ({ asin }) => {
   }, [asin]);
 
   return (
-    <div className="mt-3">
+    <div
+      className="mt-3"
+      style={{
+        backgroundColor: bgColor,
+        color: textColor,
+        padding: '1rem',
+        borderRadius: '8px'
+      }}
+    >
       {!asin && <p className="text-muted text-center">Seleziona un libro per vedere i commenti</p>}
 
       {loading && asin && (
