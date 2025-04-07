@@ -1,9 +1,14 @@
-import { Navbar, Nav, Container, Form } from 'react-bootstrap';
+import { useContext, useState } from 'react';
+import { Navbar, Nav, Container, Form , Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../modules/context';
+
 
 const MyNav = ({ searchQuery, setSearchQuery }) => {
+  const [theme, setTheme] = useContext(ThemeContext);
+
   return (
-    <Navbar bg="light" variant="light" expand="lg">
+    <Navbar bg={theme} data-bs-theme={theme} expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">EpiBooks</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -23,6 +28,9 @@ const MyNav = ({ searchQuery, setSearchQuery }) => {
             />
           </Form>
         </Navbar.Collapse>
+        <Button variant="theme" onClick={() => 
+          theme === 'light' ? setTheme ('dark') : setTheme ('light')
+        }>🌝 / 🌚</Button>
       </Container>
     </Navbar>
   );

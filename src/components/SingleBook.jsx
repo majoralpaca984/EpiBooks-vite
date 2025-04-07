@@ -10,7 +10,6 @@ const SingleBook = ({ book, isSelected, onSelect }) => {
       style={{
         border: isSelected ? '3px solid red' : '1px solid lightgray',
         cursor: 'pointer',
-        height: '100%',
       }}
       className="h-100"
     >
@@ -20,20 +19,21 @@ const SingleBook = ({ book, isSelected, onSelect }) => {
         alt={book.title}
         style={{ height: '280px', objectFit: 'cover' }}
       />
-      <Card.Body>
-        <Card.Title className="fs-6 text-center">{book.title}</Card.Title>
-
-        <Button
-          variant="success"
-          size="sm"
-          className="mt-2 w-100"
-          onClick={(e) => {
-            e.stopPropagation();
-            navigate(`/book/${book.asin}`);
-          }}
-        >
-          Dettagli
-        </Button>
+      <Card.Body className="d-flex flex-column">
+        <Card.Title className="fs-6 text-center mb-3">{book.title}</Card.Title>
+        <div className="mt-auto">
+          <Button
+            variant="success"
+            size="sm"
+            className="w-100"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/book/${book.asin}`);
+            }}
+          >
+            Dettagli
+          </Button>
+        </div>
       </Card.Body>
     </Card>
   );
